@@ -75,9 +75,9 @@ if prompt := st.chat_input("What can I help with?"):
                     context += model_info
 
             try:
-                result = rag_chain.invoke({"question": user_input, "context": context})
+                result = rag_chain.invoke({"question": prompt, "context": context})
             except Exception as e:
-                result = rag_chain_2.invoke({"question": user_input, "context": context})
+                result = rag_chain_2.invoke({"question": prompt, "context": context})
                 
             st.markdown(result)
             st.session_state.chat.append({"role": "assistant", "content": result})
