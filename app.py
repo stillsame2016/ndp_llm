@@ -33,7 +33,7 @@ template = PromptTemplate(
 
         Based on the provided context, use easy understanding language to answer the question 
         clear and precise with explanations. The context may contain truncated sentences; do 
-        not include any truncated sentences or incomplete sentences in the answer. If no 
+        not include any truncated sentences or bullets in the answer. If no 
         information is provided in the context, return the result as "Sorry I dont know the 
         answer", don't provide the wrong answer or a contradictory answer. 
 
