@@ -31,9 +31,11 @@ st.write("")
 template = PromptTemplate(
     template="""You are the expert of Large Language Models on National Data Platform. 
 
-        Based on the provided context, use easy understanding language to answer the question clear and precise with 
-        explanations. If no information is provided in the context, return the result as "Sorry I dont know the answer", 
-        don't provide the wrong answer or a contradictory answer.
+        Based on the provided context, use easy understanding language to answer the question 
+        clear and precise with explanations. The context may contain truncated information; do 
+        not use truncated information in your answer.If no information is provided in the context, 
+        return the result as "Sorry I dont know the answer", don't provide the wrong answer 
+        or a contradictory answer. 
 
         Context:{context}
 
