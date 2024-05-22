@@ -62,14 +62,23 @@ if prompt := st.chat_input("What can I help with?"):
 
             context = ""
             for model in models:
-                context += "=======================================\n"
-                context += f'author: {model["metadata"]["author"]}\n'
-                context += f'model id: {model["metadata"]["modelId"]}\n'
-                context += f'created_at: {model["metadata"]["created_at"]}\n'
-                context += f'downloads: {model["metadata"]["downloads"]}\n'
-                context += f'partial description: {model["document"]}\n\n'
+                model_info = "=======================================\n"
+                model_info += f'author: {model["metadata"]["author"]}\n'
+                model_info += f'model id: {model["metadata"]["modelId"]}\n'
+                model_info += f'created_at: {model["metadata"]["created_at"]}\n'
+                model_info += f'downloads: {model["metadata"]["downloads"]}\n'
+                model_info += f'partial description: {model["document"]}\n\n'
 
-            result = rag_chain.invoke({"question": prompt, "context": context})
+                if len(context + model_info) > 20000:
+                    break
+                else:
+                    context += model_info
+
+            try:
+                result = rag_chain.invoke({"question": user_input, "context": context})
+            except Exception as e:
+                result = rag_chain_2.invoke({"question": user_input, "context": context})
+                
             st.markdown(result)
             st.session_state.chat.append({"role": "assistant", "content": result})
 
