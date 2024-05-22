@@ -59,4 +59,5 @@ if prompt := st.chat_input("What can I help with?"):
     st.chat_message("user").markdown(prompt)
 
     with st.chat_message("assistant"):
-        st.markdown("OOPS")
+        with st.spinner("We are in the process of retrieving the relevant provisions to give you the best possible answer."):
+            st.markdown("OOPS")
