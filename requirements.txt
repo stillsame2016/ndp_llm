@@ -1,5 +1,4 @@
 streamlit
-google-generativeai
 langchain
 langchain_groq
 groq
