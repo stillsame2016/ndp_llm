@@ -9,8 +9,8 @@ from langchain.prompts import PromptTemplate
 from langchain_core.output_parsers import StrOutputParser
 from langchain_groq import ChatGroq
 
-Groq_KEY = "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"
-Groq_KEY_2 = "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"
+Groq_KEY = st.secrets["Groq_KEY"]
+Groq_KEY_2 = st.secrets["Groq_KEY_2"]
 
 llm = ChatGroq(temperature=0, model_name="llama3-70b-8192", api_key=Groq_KEY)
 llm2 = ChatGroq(temperature=0, model_name="llama3-70b-8192", api_key=Groq_KEY_2)
