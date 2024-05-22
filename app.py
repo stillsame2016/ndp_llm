@@ -19,8 +19,10 @@ llm2 = ChatGroq(temperature=0, model_name="llama3-70b-8192", api_key=Groq_KEY_2)
 if "chat" not in st.session_state:
     st.session_state.chat = []
 
+st.set_page_config(page_title="LLM Finder: Chat with NDP")
+
 # Display Form Title
-st.markdown("### CLLM Finder: Chat with NDP")
+st.markdown("### LLM Finder: Chat with NDP")
 
 # Display chat messages from history above current input box
 for message in st.session_state.chat:
