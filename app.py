@@ -20,7 +20,7 @@ if "chat" not in st.session_state:
     st.session_state.chat = []
 
 # Display Form Title
-st.title("Chat with NDP LLM")
+st.title("LLM Finder: Chat with NDP")
 
 # Display chat messages from history above current input box
 for message in st.session_state.chat:
