@@ -60,4 +60,6 @@ if prompt := st.chat_input("What can I help with?"):
 
     with st.chat_message("assistant"):
         with st.spinner("We are in the process of retrieving the relevant provisions to give you the best possible answer."):
-            st.markdown("OOPS")
+            response = requests.get(f"https://sparcal.sdsc.edu/api/v1/Utility/llm?search_terms={user_input}")
+            datasets = json.loads(response.text)
+            st.code(json.dumps(datasets, indent=4))
