@@ -15,7 +15,6 @@ Groq_KEY_2 = st.secrets["Groq_KEY_2"]
 llm = ChatGroq(temperature=0, model_name="llama3-70b-8192", api_key=Groq_KEY)
 llm2 = ChatGroq(temperature=0, model_name="llama3-70b-8192", api_key=Groq_KEY_2)
 
-
 # Add a Chat history object to Streamlit session state
 if "chat" not in st.session_state:
     st.session_state.chat = []
