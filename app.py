@@ -50,6 +50,7 @@ if prompt := st.chat_input("What can I help with?"):
                         to give you the best possible answer.
                         """):
             route = get_request_route(llm, prompt)
+            st.code(route)
             if route['request_type'] == 'NPD LLM information system':
                 result = get_llm_from_rag(llm, prompt)
                 st.markdown(result)
