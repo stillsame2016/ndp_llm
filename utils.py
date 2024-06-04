@@ -8,8 +8,6 @@ def justification_markdown(justification_data):
             if not found_dataset:
                 st.markdown("""
                             Below are the NDP datasets that are semantically closest to your request. 
-                            Our searches and justifications are performed using AI. 
-                            If you need more relevant datasets, please use other search tools on NDP.
                             """)
                 found_dataset = True
 
