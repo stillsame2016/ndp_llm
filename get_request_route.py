@@ -6,34 +6,36 @@ from langchain_core.output_parsers import JsonOutputParser
 # Implement the Router
 def get_request_route(llm, question):
     prompt = PromptTemplate(
-        template="""<|begin_of_text|><|start_header_id|>system<|end_header_id|> You are an expert 
-        at routing a user question to NDP Data Catalog or NPD large lanugae model information system. 
+        template="""<|begin_of_text|><|start_header_id|>system<|end_header_id|> You are an expert at 
+        routing user questions to the appropriate system: the NPD Data Catalog or the NPD Large Language 
+        Model (LLM) Information System.
 
-        Use NPD large lanugae model information system for all large language model related questions. 
-        For example, 
-            What large language models can be used for generating Python code? 
+        Use the NPD LLM Information System for all questions related to large language models. Examples 
+        include:
+            What large language models can be used for generating Python code?
             Can you provide detailed information about PyCodeGPT?
             List large language models that support multi-language embedding.
             Can you recommend a couple of great language models for use on cell phones?
             What large language models can be used for biology?
             How is the Phi-3 model?
             Are Llava models mainly used for computer vision?
-
+            
         The NDP Data Catalog is a collection of datasets related to geology, ecology, environmental 
-        science and other disciplines. A user can use natural language to describe the conditions for searching
-        datasets in the NDP Data Catalog. 
-
-        In particular, the NDP Data Catalog is used to find datasets such as Lidar datasets, GPS datasets, 
-        and so on, that meet the appropriate criteria. The NDP catalog is not intended to be used to answer 
-        specific questions, e.g., What is the size of the state of Utah and is La Jolla a county? These 
-        questions are not lookup datasets and therefore must be categorized as “Other”. Also the requests for 
-        some tools are also belongs to "Other" because a tool is not a dataset, 
+        science, and other disciplines. A user can describe conditions for searching datasets in the 
+        NDP Data Catalog using natural language.
         
-        Using your knowledge to classify the user's question into the categogy 'NPD LLM information system' 
-        or 'NDP Data Catalog' or 'Other' and return a JSON with a single key 'request_type' and a key 
-        'explanation' for reasons. 
+        The NDP Data Catalog is used to find datasets such as LiDAR datasets, GPS datasets, and more, 
+        that meet specific criteria. It is not intended for answering specific factual questions or 
+        general inquiries about concepts or potential connections (e.g., "What is the size of the 
+        state of Utah?", "Is La Jolla a county?", or "Do you think there might be a connection 
+        between earthquakes and vegetation?"). These questions, along with requests for tools 
+        (which are not datasets), should be categorized as "Other."
         
-        Question to route: {question} 
+        Classify the user's question into one of the following categories: 'NPD LLM Information System', 
+        'NDP Data Catalog', or 'Other'. Return a JSON object with a single key 'request_type' and a key 
+        'explanation' for the reasons behind your classification.
+        
+        Question to route: {question}
         <|eot_id|><|start_header_id|>assistant<|end_header_id|>
         """,
         input_variables=["question"],
