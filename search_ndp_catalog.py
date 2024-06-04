@@ -4,7 +4,7 @@ from langchain.prompts import PromptTemplate
 from langchain_core.output_parsers import JsonOutputParser
 
 
-def search_ndp_catalog(llm, user_input, context):
+def search_ndp_catalog(llm, user_input):
     prompt = PromptTemplate(
         template="""<|begin_of_text|><|start_header_id|>system<|end_header_id|> 
               The user is looking for datasets with the following question 
