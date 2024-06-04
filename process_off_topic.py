@@ -1,5 +1,5 @@
 from langchain.prompts import PromptTemplate
-from langchain_core.output_parsers import JsonOutputParser
+from langchain_core.output_parsers import StrOutputParser
 
 
 def process_off_topic_request(llm, user_input):
