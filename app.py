@@ -50,7 +50,17 @@ if prompt := st.chat_input("What can I help with?"):
             if route['request_type'] == 'NPD LLM information system':
                 result = get_llm_from_rag(llm, prompt)
             elif route['request_type'] == 'NDP Data Catalog':
-                result = search_ndp_catalog(llm, prompt)
+                datasets = search_ndp_catalog(llm, prompt)
+                result = ""
+                for dataset in datasets:
+                    if dataset['is_relevant']:
+                        result += f"""
+                                     **Dataset Id:** {dataset['dataset_id']}
+                                     **Title:** {dataset['title']}
+                                     **Desciption:** {dataset['summary']}
+                                     **Justification:** {dataset['reason']}
+                                     
+                                   """
             else:
                 result = process_off_topic_request(llm, prompt)
                 
