@@ -41,5 +41,5 @@ def search_ndp_catalog(llm, user_input, context):
         input_variables=["question", "context"],
     )
     question_planer = prompt | llm | JsonOutputParser()
-    result = question_planer.invoke({"question": question, "context": context})
+    result = question_planer.invoke({"question": user_input, "context": context})
     return result
