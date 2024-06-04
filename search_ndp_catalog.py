@@ -48,15 +48,14 @@ def search_ndp_catalog(llm, user_input):
         datasets. For example, TX usually indicates Texas.
         
         Images and Lidar and DEM data are raster data and not vector data.
+
+        Lidar data is not collected from GPS stations.  
         
         If the user requests data for a special region, make sure the region condition is satisfied.
         If the user requests data for a special type, make sure the type condition is satisfied.
         If the description contains latitude and longitude, please use them to exclude datasets.
         
         Please note that fire simulation is not earthquake simulation.
-
-        GPS stations are usually named like this: ARM2.CI.LY_.20, or P796.CI.LY_.20. Lidar data is not collected
-        from GPS stations.
         
         Your answer will be shown directly to the user who asked the question, so please use the correct 
         person reference.
