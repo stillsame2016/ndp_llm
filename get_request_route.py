@@ -26,7 +26,8 @@ def get_request_route(llm, question):
         In particular, the NDP Data Catalog is used to find datasets such as Lidar datasets, GPS datasets, 
         and so on, that meet the appropriate criteria. The NDP catalog is not intended to be used to answer 
         specific questions, e.g., What is the size of the state of Utah and is La Jolla a county? These 
-        questions are not lookup datasets and therefore must be categorized as “Other”.
+        questions are not lookup datasets and therefore must be categorized as “Other”. Also the requests for 
+        some tools are also belongs to "Other" because a tool is not a dataset, 
         
         Using your knowledge to classify the user's question into the categogy 'NPD LLM information system' 
         or 'NDP Data Catalog' or 'Other' and return a JSON with a single key 'request_type' and a key 
