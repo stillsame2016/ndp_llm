@@ -50,18 +50,7 @@ if prompt := st.chat_input("What can I help with?"):
             if route['request_type'] == 'NPD LLM information system':
                 result = get_llm_from_rag(llm, prompt)
             elif route['request_type'] == 'NDP Data Catalog':
-                response = requests.get(f"https://sparcal.sdsc.edu/staging-api/v1/Utility/ndp?search_terms={prompt}")
-                datasets = json.loads(response.text)
-                context = ""
-                for dataset in datasets:    
-                    title, description = dataset['description'].split("|", 1)
-                    context += f"""
-                                  Dataset Id: {dataset['dataset_id']}   
-                                  Title: {title}            
-                                  Description: {description} 
-                                """
-                # result = context
-                result = search_ndp_catalog(llm, prompt, context)
+                result = search_ndp_catalog(llm, prompt)
             else:
                 result = process_off_topic_request(llm, prompt)
                 
