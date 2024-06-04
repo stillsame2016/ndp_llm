@@ -19,10 +19,12 @@ def process_off_topic_request(llm, user_input):
                 Are Llava models mainly used for computer vision?
 
             The NDP Data Catalog is a collection of datasets related to geology, ecology, environmental 
-            science and other disciplines. A user can use natural language to describe the conditions for searching
-            datasets in the NDP Data Catalog. 
+            science and other disciplines. A user can use natural language to describe the conditions for 
+            searching datasets in the NDP Data Catalog. 
 
-            Based on the information above, answer the following question.
+            Based on the information above, answer the following question. If the user's question goes 
+            beyond the scope above, you can politely ask the user to ask a question that is within the 
+            scope of the above.
             
             Question:{question}?
 
