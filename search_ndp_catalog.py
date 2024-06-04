@@ -8,13 +8,15 @@ def get_context(datasets):
     context = ""
     for dataset in datasets:    
         title, description = dataset['description'].split("|", 1)
-        context += f"""
+        dataset_desc = f"""
                       Dataset Id: {dataset['dataset_id']}   
                       Title: {title}            
                       Description: {description} 
                     """
-        if len(context) > 20000:
+        if len(context + dataset_desc) > 20000:
             break
+        else:
+            context += dataset_desc
     return context
     
 
