@@ -55,9 +55,9 @@ if prompt := st.chat_input("What can I help with?"):
                 for dataset in datasets:
                     if dataset['is_relevant']:
                         result += f"""
-                                     **Dataset Id:** {dataset['dataset_id']}\
-                                     **Title:** {dataset['title']}\
-                                     **Desciption:** {dataset['summary']}\
+                                     **Dataset Id:** {dataset['dataset_id']}\.
+                                     **Title:** {dataset['title']}\.
+                                     **Desciption:** {dataset['summary']}\.
                                      **Justification:** {dataset['reason']}
                                      
                                    """
