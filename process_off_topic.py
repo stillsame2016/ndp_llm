@@ -30,4 +30,4 @@ def process_off_topic_request(llm, user_input):
         input_variables=["question"],
     )
     rag_chain = template | llm | StrOutputParser()
-    return rag_chain.invoke({"question": input})
+    return rag_chain.invoke({"question": user_input})
