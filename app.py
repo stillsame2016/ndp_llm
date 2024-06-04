@@ -54,10 +54,8 @@ if prompt := st.chat_input("What can I help with?"):
                     result = get_llm_from_rag(llm, prompt)
             elif route['request_type'] == 'NDP Data Catalog':
                 result = "search NDP Catalog"
-                st.markdown(result)
             else:
                 result = "Other"
-                st.markdown(result)
                 
             st.markdown(result)
             st.session_state.chat.append({"role": "assistant", "content": result})
