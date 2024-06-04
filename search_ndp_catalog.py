@@ -13,6 +13,8 @@ def get_context(datasets):
                       Title: {title}            
                       Description: {description} 
                     """
+        if len(context) > 20000:
+            break
     return context
     
 
