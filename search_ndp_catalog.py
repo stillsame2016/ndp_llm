@@ -53,6 +53,8 @@ def search_ndp_catalog(llm, user_input):
                       Title: {title}            
                       Description: {description} 
                     """
+        if len(context) > 20000:
+            break
     
     question_planer = prompt | llm | JsonOutputParser()
     result = question_planer.invoke({"question": user_input, "context": context})
