@@ -6,6 +6,8 @@ import streamlit as st
 
 from langchain_groq import ChatGroq
 from get_llm_from_rag import get_llm_from_rag
+from get_request_route import get_request_route
+
 
 Groq_KEY = st.secrets["Groq_KEY"]
 Groq_KEY_2 = st.secrets["Groq_KEY_2"]
@@ -41,6 +43,8 @@ if prompt := st.chat_input("What can I help with?"):
                         to give you the best possible answer.
                         """):
             try:
+                route = get_request_route(llm, prompt)
+                st.code(route)
                 result = get_llm_from_rag(llm, prompt)
             except Exception as e:
                 result = get_llm_from_rag(llm2, prompt)
