@@ -52,7 +52,15 @@ if prompt := st.chat_input("What can I help with?"):
             elif route['request_type'] == 'NDP Data Catalog':
                 response = requests.get(f"https://sparcal.sdsc.edu/staging-api/v1/Utility/ndp?search_terms={prompt}")
                 datasets = json.loads(response.text)
-                result = json.dumps(datasets, indent=4)
+                context = ""
+                for dataset in datasets:    
+                    title, description = dataset['description'].split("|", 1)
+                    context += f"""
+                                  Dataset Id: {dataset['dataset_id']}   
+                                  Title: {title}            
+                                  Description: {description} 
+                                """
+                result = context
                 # result = search_ndp_catalog(llm, prompt, context)
             else:
                 result = process_off_topic_request(llm, prompt)
