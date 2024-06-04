@@ -2,39 +2,44 @@ from langchain.prompts import PromptTemplate
 from langchain_core.output_parsers import JsonOutputParser
 
 
-def search_ndp_catalog(llm, user_input):
+def search_ndp_catalog(llm, user_input, context):
     prompt = PromptTemplate(
         template="""<|begin_of_text|><|start_header_id|>system<|end_header_id|> 
-              You are an expert of the national data platform catalog for various datasets. You also have general knowledge.
-              The following is a question the user is asking:
-               
-               Question:
-               {question}
-        
-               Your main job is to determine if the user is looking for data. 
-               If they are looking for data, extract the search terms from the user's request.
-        
-               Please answer with a valid JSON string, including the following three fields:
-               The boolean field "is_search_data" indicates whether the user is looking for data or not.
-               The string list field "search_terms" lists the keywords for which the user is looking for data.
-               The string field "alternative_answer" gives your positive answer to the user's input
-               if the user is not looking for data.
+              The user is looking for datasets with the following question 
+              
+              Question: 
+              {question}
+                     
+              The following are the ids and descriptions of some datasets potentially relevant 
+              to the user's question:
+              
+              Context:
+              {context}
                 
-               Please never say "I cannot" or "I could not". 
-                 
-               Please note that the user's request for datasets may appear in the middle of the text, 
-               do your best to extract the keywords for which the user is searching for datasets.
-                 
-               Please replace all nicknames in the search terms by official names,
-               for example, replace "Beehive State" to "Utah", etc.  
-                 
-               Never deny a user's request to find data. If it is not possible to extract search terms 
-               from the user's request, ask the user for further clarification.
-
+              Decide which datasets in the context satisfy the user's request. Provide your answer 
+              as a valid JSON list. Each dataset would be one element in this JSON list including with
+              the following fields:
+              
+               a string "dataset_id" field for the dataset id,  
+               a string field "title" for the data title,
+               a string field "summary" for summarizing the description with maximum 100 words and without any markdown symbols, 
+               a boolean field "is_relevant" for indicating if it is strongly relevant to the search terms
+               a string field "reason" to explain why these datasets are definitely relevant or irrelevant to the request.
+                
+               Please note that the user's request may contain the state abbreviation which can be used to exclude 
+               datasets. For example, TX usually indicates Texas.
+                
+               Images and Lidar and DEM data are raster data and not vector data.
+                
+               If the user requests data for a special region, make sure the region condition is satisfied.
+               If the user requests data for a special type, make sure the type condition is satisfied.
+               If the description contains latitude and longitude, please use them to exclude datasets.
+            
+               Please note that fire simulation is not earthquake simulation.
                 <|eot_id|><|start_header_id|>assistant<|end_header_id|>
         """,
-        input_variables=["question"],
+        input_variables=["question", "context"],
     )
     question_planer = prompt | llm | JsonOutputParser()
-    result = question_planer.invoke({"question": question})
+    result = question_planer.invoke({"question": question, "context": context})
     return result
