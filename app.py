@@ -56,9 +56,8 @@ if prompt := st.chat_input("What can I help with?"):
                 st.markdown(result)
         elif route['request_type'] == 'NDP Data Catalog':
             with st.spinner("""
-                We are in the process of retrieving the relevant provisions 
-                to give you the best possible answer.
-                """):
+                            We are searching the NDP catalog to give you the best possible answer.
+                            """):
                 result = search_ndp_catalog(llm2, prompt)
                 justification_markdown(result)
         else:
