@@ -1,3 +1,5 @@
+import json
+import requests
 from langchain.prompts import PromptTemplate
 from langchain_core.output_parsers import JsonOutputParser
 
@@ -40,6 +42,18 @@ def search_ndp_catalog(llm, user_input, context):
         """,
         input_variables=["question", "context"],
     )
+
+    response = requests.get(f"https://sparcal.sdsc.edu/staging-api/v1/Utility/ndp?search_terms={user_input}")
+    datasets = json.loads(response.text)
+    context = ""
+    for dataset in datasets:    
+        title, description = dataset['description'].split("|", 1)
+        context += f"""
+                      Dataset Id: {dataset['dataset_id']}   
+                      Title: {title}            
+                      Description: {description} 
+                    """
+    
     question_planer = prompt | llm | JsonOutputParser()
     result = question_planer.invoke({"question": user_input, "context": context})
     return result
