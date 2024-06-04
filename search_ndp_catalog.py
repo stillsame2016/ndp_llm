@@ -19,8 +19,8 @@ def search_ndp_catalog(llm, user_input):
               {context}
                 
               Decide which datasets in the context satisfy the user's request. Provide your answer 
-              as a valid JSON list. Each dataset would be one element in this JSON list including with
-              the following fields:
+              as a valid JSON list. All the datasets in the context must be included in this JSON 
+              list with the following fields:
               
                a string "dataset_id" field for the dataset id,  
                a string field "title" for the data title,
