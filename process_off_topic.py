@@ -22,7 +22,7 @@ def process_off_topic_request(llm, user_input):
             science and other disciplines. A user can use natural language to describe the conditions for searching
             datasets in the NDP Data Catalog. 
 
-            Based on the provided context, use easy understanding language to answer the question.
+            Based on the information above, answer the following question.
             
             Question:{question}?
 
