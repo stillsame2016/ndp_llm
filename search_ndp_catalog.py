@@ -4,6 +4,18 @@ from langchain.prompts import PromptTemplate
 from langchain_core.output_parsers import JsonOutputParser
 
 
+def get_context(datasets):
+    context = ""
+    for dataset in datasets:    
+        title, description = dataset['description'].split("|", 1)
+        context += f"""
+                      Dataset Id: {dataset['dataset_id']}   
+                      Title: {title}            
+                      Description: {description} 
+                    """
+    return context
+    
+
 def search_ndp_catalog(llm, user_input):
     prompt = PromptTemplate(
         template="""<|begin_of_text|><|start_header_id|>system<|end_header_id|> 
@@ -42,20 +54,24 @@ def search_ndp_catalog(llm, user_input):
         """,
         input_variables=["question", "context"],
     )
-
+    question_planer = prompt | llm | JsonOutputParser()
+    
     response = requests.get(f"https://sparcal.sdsc.edu/staging-api/v1/Utility/ndp?search_terms={user_input}")
     datasets = json.loads(response.text)
-    context = ""
-    for dataset in datasets:    
-        title, description = dataset['description'].split("|", 1)
-        context += f"""
-                      Dataset Id: {dataset['dataset_id']}   
-                      Title: {title}            
-                      Description: {description} 
-                    """
-        if len(context) > 20000:
-            break
+
+    result1 = question_planer.invoke({"question": user_input, "context": get_context(datasets[:5])})
+    result2 = question_planer.invoke({"question": user_input, "context": get_context(datasets[5:])})
     
-    question_planer = prompt | llm | JsonOutputParser()
-    result = question_planer.invoke({"question": user_input, "context": context})
-    return result
+    # context = ""
+    # for dataset in datasets:    
+    #     title, description = dataset['description'].split("|", 1)
+    #     context += f"""
+    #                   Dataset Id: {dataset['dataset_id']}   
+    #                   Title: {title}            
+    #                   Description: {description} 
+    #                 """
+    #     if len(context) > 20000:
+    #         break
+    
+    # result = question_planer.invoke({"question": user_input, "context": context})
+    return result1 + result2
