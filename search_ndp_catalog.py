@@ -57,8 +57,8 @@ def search_ndp_catalog(llm, user_input):
         
         Please note that fire simulation is not earthquake simulation.
         
-        Your answer will be shown directly to the user who asked the question, so please use the correct 
-        person reference.
+        Your answer will be shown directly to the user who asked the question, so please use "you" 
+        instead of "the user".
            
             <|eot_id|><|start_header_id|>assistant<|end_header_id|>
         """,
