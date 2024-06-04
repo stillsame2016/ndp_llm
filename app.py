@@ -60,8 +60,8 @@ if prompt := st.chat_input("What can I help with?"):
                                   Title: {title}            
                                   Description: {description} 
                                 """
-                result = context
-                # result = search_ndp_catalog(llm, prompt, context)
+                # result = context
+                result = search_ndp_catalog(llm, prompt, context)
             else:
                 result = process_off_topic_request(llm, prompt)
                 
