@@ -7,6 +7,7 @@ import streamlit as st
 from langchain_groq import ChatGroq
 from get_llm_from_rag import get_llm_from_rag
 from get_request_route import get_request_route
+from process_off_topic import process_off_topic_request
 
 
 Groq_KEY = st.secrets["Groq_KEY"]
@@ -49,7 +50,7 @@ if prompt := st.chat_input("What can I help with?"):
             elif route['request_type'] == 'NDP Data Catalog':
                 result = "search NDP Catalog"
             else:
-                result = "Other"
+                result = process_off_topic_request(llm, prompt)
                 
             st.markdown(result)
             st.session_state.chat.append({"role": "assistant", "content": result})
