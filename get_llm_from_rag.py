@@ -44,6 +44,6 @@ def get_llm_from_rag(llm, question):
             break
         else:
             context += model_info
-    return rag_chain.invoke({"question": prompt, "context": context})
+    return rag_chain.invoke({"question": question, "context": context})
 
 
