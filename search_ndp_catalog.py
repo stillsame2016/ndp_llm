@@ -40,7 +40,7 @@ def search_ndp_catalog(llm, user_input):
         
         a string "dataset_id" field for the dataset id,  
         a string field "title" for the data title,
-        a string field "summary" for summarizing the description with maximum 100 words and without any markdown symbols, 
+        a string field "summary" for summarizing the description with maximum 200 words and without any markdown symbols, 
         a boolean field "is_relevant" for indicating if it is strongly relevant to the search terms
         a string field "reason" to explain why these datasets are definitely relevant or irrelevant to the request.
         
