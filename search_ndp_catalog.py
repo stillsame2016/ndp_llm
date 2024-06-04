@@ -61,7 +61,9 @@ def search_ndp_catalog(llm, user_input):
     response = requests.get(f"https://sparcal.sdsc.edu/staging-api/v1/Utility/ndp?search_terms={user_input}")
     datasets = json.loads(response.text)
 
-    # result1 = question_planer.invoke({"question": user_input, "context": get_context(datasets[:5])})
+    result1 = question_planer.invoke({"question": user_input, "context": get_context(datasets[:5])})
+    return result1
+    
     # result2 = question_planer.invoke({"question": user_input, "context": get_context(datasets[5:])})
     
     # context = ""
@@ -75,5 +77,5 @@ def search_ndp_catalog(llm, user_input):
     #     if len(context) > 20000:
     #         break
     
-    result = question_planer.invoke({"question": user_input, "context": get_context(datasets)})
-    return result
+    # result = question_planer.invoke({"question": user_input, "context": get_context(datasets)})
+    # return result
