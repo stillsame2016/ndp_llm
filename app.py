@@ -55,7 +55,7 @@ if prompt := st.chat_input("What can I help with?"):
                 result = get_llm_from_rag(llm, prompt)
                 st.markdown(result)
             elif route['request_type'] == 'NDP Data Catalog':
-                result = search_ndp_catalog(llm, prompt)
+                result = search_ndp_catalog(llm2, prompt)
                 justification_markdown(result)
             else:
                 result = process_off_topic_request(llm, prompt)
