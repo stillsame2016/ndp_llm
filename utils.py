@@ -7,7 +7,9 @@ def justification_markdown(justification_data):
         if dataset['is_relevant']:
             if not found_dataset:
                 st.markdown("""
-                            Below are the NDP datasets that are semantically closest to your request. 
+                            Here are the datasets that are semantically closest to your query. If these datasets 
+                            do not fully satisfy your requirements, you can refine or rephrase your query and 
+                            try again.
                             """)
                 found_dataset = True
 
