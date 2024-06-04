@@ -18,7 +18,7 @@ def process_off_topic_request(llm, user_input):
                 How is the Phi-3 model?
                 Are Llava models mainly used for computer vision?
 
-            The NDP Data Catalog is a collection of many datasets related to geology, ecology, environmental 
+            The NDP Data Catalog is a collection of datasets related to geology, ecology, environmental 
             science and other disciplines. A user can use natural language to describe the conditions for searching
             datasets in the NDP Data Catalog. 
 
