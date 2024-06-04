@@ -10,6 +10,7 @@ from get_llm_from_rag import get_llm_from_rag
 from get_request_route import get_request_route
 from process_off_topic import process_off_topic_request
 from search_ndp_catalog import search_ndp_catalog
+from utils import justification_markdown
 
 
 Groq_KEY = st.secrets["Groq_KEY"]
@@ -51,16 +52,7 @@ if prompt := st.chat_input("What can I help with?"):
                 result = get_llm_from_rag(llm, prompt)
             elif route['request_type'] == 'NDP Data Catalog':
                 datasets = search_ndp_catalog(llm, prompt)
-                result = ""
-                for dataset in datasets:
-                    if dataset['is_relevant']:
-                        result += f"""
-                                     **Dataset Id:**    {dataset['dataset_id']}  
-                                     **Title:**         {dataset['title']}   
-                                     **Desciption:**    {dataset['summary']}     
-                                     **Justification:** {dataset['reason']}    
-                                     
-                                   """
+                result = justification_markdown(datasets)
             else:
                 result = process_off_topic_request(llm, prompt)
                 
