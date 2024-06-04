@@ -50,13 +50,15 @@ if prompt := st.chat_input("What can I help with?"):
             st.code(route)     
             if route['request_type'] == 'NPD LLM information system':
                 result = get_llm_from_rag(llm, prompt)
+                st.markdown(result)
             elif route['request_type'] == 'NDP Data Catalog':
                 datasets = search_ndp_catalog(llm, prompt)
-                result = justification_markdown(datasets)
+                result = json.dumps(datasets)
+                justification_markdown(datasets)
             else:
                 result = process_off_topic_request(llm, prompt)
+                st.markdown(result)
                 
-            st.markdown(result)
             st.session_state.chat.append({"role": "assistant", "content": result})
 
             
