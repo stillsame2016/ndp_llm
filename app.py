@@ -31,7 +31,10 @@ st.markdown("### Chat with NDP")
 # Display chat messages from history above current input box
 for message in st.session_state.chat:
     with st.chat_message(message['role']):
-        st.markdown(message['content'])
+        if isinstance(message['content'], str):
+            st.markdown(message['content'])
+        else:
+            justification_markdown(message['content'])
 st.write("")
 
 # Accept user's next message, add to context, resubmit context to Gemini
