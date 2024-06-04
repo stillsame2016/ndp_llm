@@ -76,4 +76,4 @@ def search_ndp_catalog(llm, user_input):
             break
     
     result = question_planer.invoke({"question": user_input, "context": context})
-    return result1 + result2
+    return result
