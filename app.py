@@ -2,11 +2,8 @@ import json
 import os
 import time
 import traceback
-import requests
 import streamlit as st
 
-from langchain.prompts import PromptTemplate
-from langchain_core.output_parsers import StrOutputParser
 from langchain_groq import ChatGroq
 from get_llm_from_rag import get_llm_from_rag
 
