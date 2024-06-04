@@ -49,7 +49,7 @@ def search_ndp_catalog(llm, user_input):
         
         Images and Lidar and DEM data are raster data and not vector data.
 
-        Lidar data is not collected from GPS stations.  
+        Don't make Lidar data relevant to GPS data.  
         
         If the user requests data for a special region, make sure the region condition is satisfied.
         If the user requests data for a special type, make sure the type condition is satisfied.
