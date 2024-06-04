@@ -20,7 +20,7 @@ if "chat" not in st.session_state:
 st.set_page_config(page_title="LLM Finder: Chat with NDP")
 
 # Display Form Title
-st.markdown("### LLM Finder: Chat with NDP")
+st.markdown("### Chat with NDP")
 
 # Display chat messages from history above current input box
 for message in st.session_state.chat:
