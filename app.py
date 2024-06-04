@@ -44,13 +44,13 @@ if prompt := st.chat_input("What can I help with?"):
                         """):
             try:
                 route = get_request_route(llm, prompt)
-            except Exception as e:
+            except:
                 route = get_request_route(llmw, prompt)
             st.code(route)     
             if route['request_type'] == 'NPD LLM information system':
                 try:
                     result = get_llm_from_rag(llm, prompt)
-                except Exception as e:
+                except:
                     result = get_llm_from_rag(llm, prompt)
             elif route['request_type'] == 'NDP Data Catalog':
                 result = "search NDP Catalog"
