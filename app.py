@@ -8,6 +8,7 @@ from langchain_groq import ChatGroq
 from get_llm_from_rag import get_llm_from_rag
 from get_request_route import get_request_route
 from process_off_topic import process_off_topic_request
+from search_ndp_catalog import search_ndp_catalog
 
 
 Groq_KEY = st.secrets["Groq_KEY"]
@@ -48,7 +49,7 @@ if prompt := st.chat_input("What can I help with?"):
             if route['request_type'] == 'NPD LLM information system':
                 result = get_llm_from_rag(llm, prompt)
             elif route['request_type'] == 'NDP Data Catalog':
-                result = "search NDP Catalog"
+                result = search_ndp_catalog(llm, prompt)
             else:
                 result = process_off_topic_request(llm, prompt)
                 
