@@ -45,21 +45,29 @@ if prompt := st.chat_input("What can I help with?"):
     st.session_state.chat.append({"role": "user", "content": prompt})
 
     with st.chat_message("assistant"):
-        with st.spinner("""
-                        We are in the process of retrieving the relevant provisions 
-                        to give you the best possible answer.
-                        """):
-            route = get_request_route(llm, prompt)
-            # st.code(route)
-            if route['request_type'] == 'NPD LLM information system':
+        route = get_request_route(llm, prompt)
+         # st.code(route)
+        if route['request_type'] == 'NPD LLM information system':
+            with st.spinner("""
+                            We are in the process of retrieving the relevant provisions 
+                            to give you the best possible answer.
+                            """):
                 result = get_llm_from_rag(llm, prompt)
                 st.markdown(result)
-            elif route['request_type'] == 'NDP Data Catalog':
+        elif route['request_type'] == 'NDP Data Catalog':
+            with st.spinner("""
+                We are in the process of retrieving the relevant provisions 
+                to give you the best possible answer.
+                """):
                 result = search_ndp_catalog(llm2, prompt)
                 justification_markdown(result)
-            else:
-                result = process_off_topic_request(llm, prompt)
-                st.markdown(result)
+        else:
+            result = process_off_topic_request(llm, prompt)
+            st.markdown(result)
+        
+        
+            
+           
                 
             st.session_state.chat.append({"role": "assistant", "content": result})
 
