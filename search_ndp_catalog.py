@@ -55,7 +55,8 @@ def search_ndp_catalog(llm, user_input):
         
         Please note that fire simulation is not earthquake simulation.
 
-        GPS stations are usually named like this: ARM2.CI.LY_.20, or P796.CI.LY_.20.
+        GPS stations are usually named like this: ARM2.CI.LY_.20, or P796.CI.LY_.20. Lidar data is not collected
+        from GPS stations.
         
         Your answer will be shown directly to the user who asked the question, so please use the correct 
         person reference.
