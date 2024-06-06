@@ -53,7 +53,7 @@ if prompt := st.chat_input("What can I help with?"):
                             We are in the process of retrieving the relevant provisions 
                             from our LLM Information System to give you the best possible answer.
                             """):
-                result = get_llm_from_rag(llm, prompt)
+                result = get_llm_from_rag(llm, llm2, prompt)
                 st.markdown(result)
         elif route['request_type'] == 'NDP Data Catalog':
             with st.spinner("""
