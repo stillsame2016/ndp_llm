@@ -63,7 +63,7 @@ if prompt := st.chat_input("What can I help with?"):
                 justification_markdown(result)
         else:
             with st.spinner(""):
-                result = process_off_topic_request(llm, prompt)
+                result = process_off_topic_request(llm, llm2, prompt)
                 st.markdown(result)
                
         st.session_state.chat.append({"role": "assistant", "content": result})
