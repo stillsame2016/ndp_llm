@@ -28,9 +28,9 @@ def get_request_route(llm, question):
         that meet specific criteria. It is not intended for answering specific factual questions or 
         general inquiries about concepts or potential connections (e.g., "What is the size of the 
         state of Utah?", "Is La Jolla a county?", or "Do you think there might be a connection 
-        between earthquakes and vegetation?", or "Are there any wildfile simulation tools or libraries?"). 
-        These questions, along with requests for tools (which are not datasets), should be categorized as 
-        "Other." 
+        between earthquakes and vegetation?", or "Are there any wildfile simulation tools or libraries?",
+        or "what data do you have?"). These questions, along with requests for tools (which are not 
+        datasets), should be categorized as "Other." 
             
         Classify the user's question into one of the following categories: 'NPD LLM Information System', 
         'NDP Data Catalog', or 'Other'. Return a JSON object with a single key 'request_type' and a key 
