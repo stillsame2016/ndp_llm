@@ -4,7 +4,7 @@ from langchain_core.output_parsers import JsonOutputParser
 
 #####################################################################
 # Implement the Router
-def get_request_route(llm, question):
+def get_request_route(llm, llm2, question):
     prompt = PromptTemplate(
         template="""<|begin_of_text|><|start_header_id|>system<|end_header_id|> You are an expert at 
         routing user questions to the appropriate system: the NPD Data Catalog or the NPD Large Language 
@@ -42,5 +42,9 @@ def get_request_route(llm, question):
         input_variables=["question"],
     )
     question_router = prompt | llm | JsonOutputParser()
-    result = question_router.invoke({"question": question})
+    question_router2 = prompt | llm2 | JsonOutputParser()
+    try:
+        result = question_router.invoke({"question": question})
+    except:
+        result = question_router2.invoke({"question": question})
     return result
