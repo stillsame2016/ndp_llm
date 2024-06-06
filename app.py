@@ -45,7 +45,7 @@ if prompt := st.chat_input("What can I help with?"):
     st.session_state.chat.append({"role": "user", "content": prompt})
 
     with st.chat_message("assistant"):
-        with st.spinner("")
+        with st.spinner(""):
             try:
                 route = get_request_route(llm, prompt)
             except:
