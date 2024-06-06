@@ -45,11 +45,12 @@ if prompt := st.chat_input("What can I help with?"):
     st.session_state.chat.append({"role": "user", "content": prompt})
 
     with st.chat_message("assistant"):
-        try:
-            route = get_request_route(llm, prompt)
-        except:
-            route = get_request_route(llm2, prompt)
-        # st.code(route)
+        with st.spinner("")
+            try:
+                route = get_request_route(llm, prompt)
+            except:
+                route = get_request_route(llm2, prompt)
+            # st.code(route)
         if route['request_type'] == 'NPD LLM information system':
             with st.spinner("""
                             We are in the process of retrieving the relevant provisions 
