@@ -27,6 +27,8 @@ st.set_page_config(page_title="LLM Finder: Chat with NDP")
 
 # Display Form Title
 st.markdown("### Chat with NDP")
+stmmarkdown("""Pose a question related to free large language models hosted on Hugging 
+               Face. Search the NDP data catalog to find the desired datasets.""")
 
 # Display chat messages from history above current input box
 for message in st.session_state.chat:
