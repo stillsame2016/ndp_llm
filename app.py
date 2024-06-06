@@ -46,35 +46,24 @@ if prompt := st.chat_input("What can I help with?"):
 
     with st.chat_message("assistant"):
         with st.spinner(""):
-            try:
-                route = get_request_route(llm, prompt)
-            except:
-                route = get_request_route(llm2, prompt)
+            route = get_request_route(llm, prompt)
             # st.code(route)
         if route['request_type'] == 'NPD LLM information system':
             with st.spinner("""
                             We are in the process of retrieving the relevant provisions 
-                            to give you the best possible answer.
+                            from our LLM Information System to give you the best possible answer.
                             """):
-                try:
-                    result = get_llm_from_rag(llm, prompt)
-                except:
-                    result = get_llm_from_rag(llm2, prompt)
+                result = get_llm_from_rag(llm, prompt)
                 st.markdown(result)
         elif route['request_type'] == 'NDP Data Catalog':
             with st.spinner("""
                             We are searching the NDP catalog to give you the best possible answer.
                             """):
-                try:
-                    result = search_ndp_catalog(llm, prompt)
-                except:
-                    result = get_llm_from_rag(llm2, prompt)
+                result = search_ndp_catalog(llm, prompt)
                 justification_markdown(result)
         else:
-            try:
+            with st.spinner(""):
                 result = process_off_topic_request(llm, prompt)
-            except:
-                result = process_off_topic_request(llm2, prompt)
-            st.markdown(result)
+                st.markdown(result)
                
         st.session_state.chat.append({"role": "assistant", "content": result})
