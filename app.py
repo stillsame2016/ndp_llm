@@ -59,7 +59,7 @@ if prompt := st.chat_input("What can I help with?"):
             with st.spinner("""
                             We are searching the NDP catalog to give you the best possible answer.
                             """):
-                result = search_ndp_catalog(llm, prompt)
+                result = search_ndp_catalog(llm, llm2, prompt)
                 justification_markdown(result)
         else:
             with st.spinner(""):
