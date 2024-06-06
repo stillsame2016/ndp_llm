@@ -7,7 +7,7 @@ from langchain_core.output_parsers import StrOutputParser
 
 #####################################################################
 # Implement the Router
-def get_llm_from_rag(llm, question):
+def get_llm_from_rag(llm, llm2, question):
     template = PromptTemplate(
         template="""You are the expert of Large Language Models on National Data Platform. 
     
@@ -25,7 +25,8 @@ def get_llm_from_rag(llm, question):
         input_variables=["question", "context"],
     )
     rag_chain = template | llm | StrOutputParser()
-
+    rag_chain2 = template | llm2 | StrOutputParser()
+    
     response = requests.get(f"https://sparcal.sdsc.edu/api/v1/Utility/llm?search_terms={question}")
     models = json.loads(response.text)
     models = models[0:8]
@@ -43,6 +44,8 @@ def get_llm_from_rag(llm, question):
             break
         else:
             context += model_info
-    return rag_chain.invoke({"question": question, "context": context})
-
+    try:
+        return rag_chain.invoke({"question": question, "context": context})
+    except:
+        return rag_chain2.invoke({"question": question, "context": context})
 
