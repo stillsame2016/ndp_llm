@@ -46,7 +46,7 @@ if prompt := st.chat_input("What can I help with?"):
 
     with st.chat_message("assistant"):
         with st.spinner(""):
-            route = get_request_route(llm, prompt)
+            route = get_request_route(llm, llm2, prompt)
             # st.code(route)
         if route['request_type'] == 'NPD LLM information system':
             with st.spinner("""
