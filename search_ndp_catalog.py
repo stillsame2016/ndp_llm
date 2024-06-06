@@ -20,7 +20,7 @@ def get_context(datasets):
     return context
     
 
-def search_ndp_catalog(llm, user_input):
+def search_ndp_catalog(llm, llm2, user_input):
     prompt = PromptTemplate(
         template="""<|begin_of_text|><|start_header_id|>system<|end_header_id|> 
         The user is looking for datasets with the following question 
@@ -65,11 +65,20 @@ def search_ndp_catalog(llm, user_input):
         input_variables=["question", "context"],
     )
     question_planer = prompt | llm | JsonOutputParser()
+    question_planer2 = prompt | llm2 | JsonOutputParser()
     
     response = requests.get(f"https://sparcal.sdsc.edu/staging-api/v1/Utility/ndp?search_terms={user_input}")
     datasets = json.loads(response.text)
 
-    result1 = question_planer.invoke({"question": user_input, "context": get_context(datasets[:5])})
-    result2 = question_planer.invoke({"question": user_input, "context": get_context(datasets[5:])})
+    try:
+        result1 = question_planer.invoke({"question": user_input, "context": get_context(datasets[:5])})
+    except:
+        result1 = question_planer2.invoke({"question": user_input, "context": get_context(datasets[:5])})
+
+    try:
+        result2 = question_planer.invoke({"question": user_input, "context": get_context(datasets[5:])})
+    except:
+        result2 = question_planer2.invoke({"question": user_input, "context": get_context(datasets[5:])})
+        
     return result1 + result2
     
