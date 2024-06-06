@@ -2,7 +2,7 @@ from langchain.prompts import PromptTemplate
 from langchain_core.output_parsers import StrOutputParser
 
 
-def process_off_topic_request(llm, user_input):
+def process_off_topic_request(llm, llm2, user_input):
     template = PromptTemplate(
         template="""<|begin_of_text|><|start_header_id|>system<|end_header_id|> You are an expert of the 
             NDP Data Catalog and The NPD large lanugae model information system. 
@@ -32,4 +32,8 @@ def process_off_topic_request(llm, user_input):
         input_variables=["question"],
     )
     rag_chain = template | llm | StrOutputParser()
-    return rag_chain.invoke({"question": user_input})
+    rag_chain2 = template | llm2 | StrOutputParser()
+    try:
+        return rag_chain.invoke({"question": user_input})
+    except:
+        return rag_chain2.invoke({"question": user_input})
